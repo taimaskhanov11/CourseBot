@@ -2,8 +2,8 @@ bot:
   token: your_token
   admins:
 db:
-  user: postgres
-  password: postgres
+  user: sqlite
+  password: sqlite
   database: coursebot
   host: localhost
   port: 5432
