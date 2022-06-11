@@ -11,8 +11,8 @@ router = Router()
 quiz_photo_id: dict[int, str] = {}
 
 
-def save_file_id(message: types.Message):
-    quiz_photo_id[1] = message.photo[0].file_id
+def save_file_id(message: types.Message, x):
+    quiz_photo_id[x] = message.photo[0].file_id
 
 
 class Quiz(StatesGroup):
@@ -29,7 +29,7 @@ async def quiz_1(message: types.Message, state: FSMContext):
     await state.update_data(point=0)
     message = await message.answer_photo(quiz_photo_id.get(1, FSInputFile(MEDIA_DIR / "hare_1.png")),
                                          reply_markup=quiz_markups.quiz("Hair", "Hare"))
-    save_file_id(message)
+    save_file_id(message, 1)
     await state.set_state(Quiz.quiz_2)
 
 
@@ -41,7 +41,7 @@ async def quiz_2(call: types.CallbackQuery, state: FSMContext):
 
     message = await call.message.answer_photo(quiz_photo_id.get(2, FSInputFile(MEDIA_DIR / "sea_2.png")),
                                               reply_markup=quiz_markups.quiz("Sea", "See"))
-    save_file_id(message)
+    save_file_id(message, 2)
     await state.set_state(Quiz.quiz_3)
 
 
@@ -53,7 +53,7 @@ async def quiz_3(call: types.CallbackQuery, state: FSMContext):
 
     message = await call.message.answer_photo(quiz_photo_id.get(3, FSInputFile(MEDIA_DIR / "sun_3.png")),
                                               reply_markup=quiz_markups.quiz("Son", "Sun"))
-    save_file_id(message)
+    save_file_id(message, 3)
     await state.set_state(Quiz.quiz_4)
 
 
@@ -65,7 +65,7 @@ async def quiz_4(call: types.CallbackQuery, state: FSMContext):
 
     message = await call.message.answer_photo(quiz_photo_id.get(4, FSInputFile(MEDIA_DIR / "bee_4.png")),
                                               reply_markup=quiz_markups.quiz("Be", "Bee"))
-    save_file_id(message)
+    save_file_id(message, 4)
     await state.set_state(Quiz.quiz_5)
 
 
@@ -77,7 +77,7 @@ async def quiz_5(call: types.CallbackQuery, state: FSMContext):
 
     message = await call.message.answer_photo(quiz_photo_id.get(5, FSInputFile(MEDIA_DIR / "pear_5.png")),
                                               reply_markup=quiz_markups.quiz("Pair", "Pear"))
-    save_file_id(message)
+    save_file_id(message, 5)
     await state.set_state(Quiz.finish)
 
 
